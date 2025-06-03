@@ -40,7 +40,6 @@ class DataFrameGenerator:
                      f"n_rows={self.n_rows}, freq='{self.freq}', "
                      f"n_unique_dates={self.n_unique_dates}, random_seed={self.random_seed}")
 
-
     def _validate_params(self):
         if self.start_date >= self.end_date:
             raise ValueError("start_date must be before end_date")
@@ -50,7 +49,6 @@ class DataFrameGenerator:
             raise ValueError("freq must be one of s, min, h, d")
         if self.n_unique_dates > self.n_rows:
             raise ValueError("n_unique_dates must be less than or equal to n_rows")
-
 
     def generate(self) -> pd.DataFrame:
         """
@@ -63,14 +61,18 @@ class DataFrameGenerator:
             'h': 'H',
             'd': 'D'
         }
-        unique_dates = pd.date_range(start=self.start_date, end=self.end_date, freq=freq_to_pandas[self.freq])
+        unique_dates = pd.date_range(start=self.start_date,
+                                     end=self.end_date,
+                                     freq=freq_to_pandas[self.freq])
+
         if len(unique_dates) < self.n_unique_dates:
-            raise ValueError("Not enough unique dates can be generated with given range and frequency.")
+            raise ValueError("Not enough dates can be generated with given range.")
 
         selected_dates = self.rng.choice(unique_dates, size=self.n_unique_dates, replace=False)
         repeated_dates = self.rng.choice(selected_dates, size=self.n_rows, replace=True)
         repeated_dates = self.rng.permutation(repeated_dates)
         df = pd.DataFrame({'date': repeated_dates})
 
-        logging.info(f"Generated DataFrame with {df.shape[0]} rows and {self.n_unique_dates} unique dates.")
+        logging.info(f"Generated DataFrame with {df.shape[0]} rows "
+                     f"and {self.n_unique_dates} unique dates.")
         return df

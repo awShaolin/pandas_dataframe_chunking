@@ -1,6 +1,7 @@
 import pandas as pd
 import logging
 
+
 class HashMapChunker:
     def __init__(self,
                  min_chunk_size: int,
@@ -16,7 +17,6 @@ class HashMapChunker:
         self.min_chunk_size = min_chunk_size
         self.column = column
 
-
     def chunk(self, df: pd.DataFrame) -> list:
         """
 
@@ -27,7 +27,9 @@ class HashMapChunker:
             logging.error("Column name must be in df.")
             raise ValueError("Column name must be in df.")
 
-        logging.info(f"Starting chunking with min_chunk_size={self.min_chunk_size} on column='{self.column}'")
+        logging.info(f"Starting chunking with "
+                     f"min_chunk_size={self.min_chunk_size} "
+                     f"on column='{self.column}'")
 
         grouped = {}
         # for idx, row in df.iterrows():
