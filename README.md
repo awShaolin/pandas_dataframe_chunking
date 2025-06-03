@@ -53,7 +53,7 @@ Unit tests written using unittest and compatible with pytest.
 To run the tests:
 ```bash
 cd pandas_dataframe_chunking # you should be in the root directory
-pytest -v tests/tester.py
+pytest -v tests/test_chunker.py
 ```
 Tests: 
 - Chunking an empty DataFrame.
