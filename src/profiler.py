@@ -1,13 +1,12 @@
 import time
 import tracemalloc
 from functools import wraps
+import logging
 
-from src.logger_config import *
 
 def profile(fn):
     @wraps(fn)
     def inner(*args, **kwargs):
-        fn_kwargs_str = ', '.join(f'{k}={v}' for k, v in kwargs.items())
         logging.info(f'\n{fn.__name__}()')
 
         t = time.perf_counter()

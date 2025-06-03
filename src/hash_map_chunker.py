@@ -1,7 +1,5 @@
-import logging
-
 import pandas as pd
-from logger_config import *
+import logging
 
 class HashMapChunker:
     def __init__(self,
@@ -17,6 +15,7 @@ class HashMapChunker:
             raise ValueError("min_chunk_size must be greater than 0.")
         self.min_chunk_size = min_chunk_size
         self.column = column
+
 
     def chunk(self, df: pd.DataFrame) -> list:
         """
@@ -64,4 +63,3 @@ class HashMapChunker:
         logging.info(f"Finished chunking with min_chunk_size={self.min_chunk_size}")
         logging.info(f"Created {len(chunks)} chunks.")
         return chunks
-

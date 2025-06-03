@@ -1,8 +1,7 @@
 import random
 import numpy as np
 import pandas as pd
-
-from logger_config import *
+import logging
 
 
 class DataFrameGenerator:
@@ -41,6 +40,7 @@ class DataFrameGenerator:
                      f"n_rows={self.n_rows}, freq='{self.freq}', "
                      f"n_unique_dates={self.n_unique_dates}, random_seed={self.random_seed}")
 
+
     def _validate_params(self):
         if self.start_date >= self.end_date:
             raise ValueError("start_date must be before end_date")
@@ -74,6 +74,3 @@ class DataFrameGenerator:
 
         logging.info(f"Generated DataFrame with {df.shape[0]} rows and {self.n_unique_dates} unique dates.")
         return df
-
-
-
